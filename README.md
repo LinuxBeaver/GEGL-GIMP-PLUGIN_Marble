@@ -1,11 +1,11 @@
-### Marble Gimp Plugin
+## Marble Gimp Plugin
+![image](https://github.com/LinuxBeaver/Gimp_Marble_Wallpaper_Plugin/assets/78667207/0d7b5d61-0e4c-4ca4-bfcf-26150fb001f5)
+
+![image](https://github.com/LinuxBeaver/Gimp_Marble_Wallpaper_Plugin/assets/78667207/a347926f-1fec-4275-b1e3-82c7522ef66b)
 
 Render Marble wallpaper in Gimp using this GEGL plugin
 
-Plugin goes in a special directory and will NOT work in the normal plugins folder.
-
-Like many of my filters, just because this is a "GEGL Operation' does not mean it will work in applications outside of Gimp.
-I'm trying to avoid using the term "GEGL" as most of my plugins are Gimp GEGL hybrid and work in Gimp exclusively. 
+Plugin goes in a special directory and will **NOT** work in the normal plugins folder.
 
 **Windows**
 
