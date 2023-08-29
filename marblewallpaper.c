@@ -122,6 +122,16 @@ typedef struct
 /* This is a special way of listing GEGL nodes that will be defined below. The nodes below are defined with "state->" in front of them. So the graph can update with a blend mode switcher. */
 
 
+static void attach (GeglOperation *operation)
+{
+  GeglProperties *o = GEGL_PROPERTIES (operation);
+
+  if (!o->seed )
+    {
+	o->seed = (1783907628);
+    }
+}
+
 static void update_graph (GeglOperation *operation)
 {
 
@@ -131,10 +141,13 @@ static void update_graph (GeglOperation *operation)
   State *state = o->user_data = g_malloc0 (sizeof (State));
 
   if (!state) return;
+
 /* This is telling seed to start at a large number instead of default 0. It will still say 0 but it will be at this until the random seed is pressed. 0 is swapped for said number
 in default zero had a lousy effect.*/
-  if (!o->seed ) { o->seed = (1783907628);
-}
+  if (!o->seed )
+    {
+	o->seed = (1783907628);
+    }
 
 
   state->input    = gegl_node_get_input_proxy (gegl, "input");
@@ -262,6 +275,7 @@ GeglOperationMetaClass *operation_meta_class = GEGL_OPERATION_META_CLASS (klass)
   operation_class = GEGL_OPERATION_CLASS (klass);
 
   operation_meta_class->update = update_graph;
+operation_class->attach = attach;
 
   gegl_operation_class_set_keys (operation_class,
 /*If this filter ever breaks try changing the name lb: to something else. This is because Gimp's team may want longer name spaces.*/
