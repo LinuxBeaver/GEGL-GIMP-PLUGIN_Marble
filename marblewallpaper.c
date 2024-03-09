@@ -238,14 +238,14 @@ default: blendmode = state->softlight;
 /* Most of the marble graph is here*/
 
   gegl_node_link_many (state->noise1, state->difference, NULL);
-  gegl_node_connect_from (state->hardlight, "aux", state->difference, "output");
-  gegl_node_connect_from (state->difference, "aux", state->noise2, "output");
+  gegl_node_connect (state->hardlight, "aux", state->difference, "output");
+  gegl_node_connect (state->difference, "aux", state->noise2, "output");
 /*A container is inside a container. 
 Hardlight is connecting to Difference. Containing noise1 and difference, and Difference is connecting to noise 2 in its own container.*/
   
 
 gegl_node_link_many (state->nop, state->color, NULL);
-gegl_node_connect_from (blendmode, "aux", state->color, "output");
+gegl_node_connect (blendmode, "aux", state->color, "output");
 /*These are the nodes relating to the color overlayand its blend mode switch. They are at the end of the graph.
 blendmode is the only node without a "state->" in front of it, because it is a wildcard for any blend mode the
 user selections. */
