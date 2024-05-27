@@ -22,7 +22,7 @@ The syntax is also listed so users can study how this filter was made.
 id=c clear aux=[ ref=c ]
 gimp:layer-mode layer-mode=multiply  aux=[   noise-solid x-size=2.1 y-size=2.1 detail=15 seed=4136 gimp:layer-mode layer-mode=difference aux=[ noise-solid x-size=0.3 y-size=0.3 detail=15 seed=3433442   ] brightness-contrast contrast=1.1 brightness=0.60 levels out-high=1.4 ]
 
-hard-light aux=[  noise-solid x-size=0.7 y-size=1.3 detail=15 seed=3224 
+hard-light aux=[  noise-solid x-size=0.7 y-size=1.3 detail=15 seed=3224
 difference aux=[ noise-solid x-size=1.9 y-size=2.2 detail=15 seed=2432 opacity value=1.00  ] ]
 
   crop id=sl gimp:layer-mode layer-mode=screen blend-space=rgb-perceptual aux=[ ref=sl softglow glow-radius=50  brightness=0.42 sharpness=0.357  gimp:layer-mode layer-mode=overlay blend-space=rgb-perceptual opacity=0.71 aux=[ color value=#afafaf ] crop id=gaus gimp:layer-mode layer-mode=luminance opacity=0.65 aux=[ ref=gaus gaussian-blur std-dev-x=8 std-dev-y=8 ] levels in-high=1.2 out-high=1.0
@@ -71,7 +71,7 @@ enum_end (marbleclownworld)
 /* This is the first part of color overlay's blend mode switch. The ENUM list with all the blend modes needed by color overlay */
 
 
-property_seed (seed, _("Seed for Marble Texture"), specifiednumber)
+property_seed (seed, _("Seed for Marble Texture"), rand)
     description (_("Seed Texture of the Marble. Sometimes the seed will end up lousy. If that is the case just press seed again until you find a decent texture."))
 /* This is the seed of gegl:noise-solid that internally makes a marble effect*/
 
@@ -168,33 +168,33 @@ in default zero had a lousy effect.*/
                                   NULL);
 
   state->noise1 = gegl_node_new_child (gegl,
-                                  "operation", "gegl:noise-solid", "x-size", 0.7, "y-size", 0.13, "detail", 15, "seed",
+                                  "operation", "gegl:noise-solid", "x-size", 0.7, "y-size", 0.13, "detail", 15,
                                   NULL);
 
   state->noise2 = gegl_node_new_child (gegl,
-                                  "operation", "gegl:noise-solid", "x-size", 1.9, "y-size", 2.2, "detail", 15,  "seed", 3342,
+                                  "operation", "gegl:noise-solid", "x-size", 1.9, "y-size", 2.2, "detail", 15,
                                   NULL);
 /* Properties for noise solid and other filters are being embedded. */
 
   state->hardlight = gegl_node_new_child (gegl,
-                                  "operation", "gegl:hard-light", 
+                                  "operation", "gegl:hard-light",
                                   NULL);
 
   state->difference = gegl_node_new_child (gegl,
-                                  "operation", "gegl:difference", 
+                                  "operation", "gegl:difference",
                                   NULL);
 
   state->nop = gegl_node_new_child (gegl,
-                                  "operation", "gegl:nop", 
+                                  "operation", "gegl:nop",
                                   NULL);
 
   state->color = gegl_node_new_child (gegl,
-                                  "operation", "gegl:color-overlay", 
+                                  "operation", "gegl:color-overlay",
                                   NULL);
 
 /* Below are the blend mode numbers for Gimp's grain merge, multiply, lchcolor, lighten and softlight. If Gimp ever gets
-new blend modes all these numbers will be off by one. Either 1 up or one down. (likely one up). This is an 
-example of me predicting how my plugins will break  for future maintainers. 
+new blend modes all these numbers will be off by one. Either 1 up or one down. (likely one up). This is an
+example of me predicting how my plugins will break  for future maintainers.
 
 It is not possible to just type in the words "grain merge" or "lchcolor" ect... it only works through numbers.*/
 state->grainmerge = gegl_node_new_child (gegl,
@@ -240,9 +240,9 @@ default: blendmode = state->softlight;
   gegl_node_link_many (state->noise1, state->difference, NULL);
   gegl_node_connect (state->hardlight, "aux", state->difference, "output");
   gegl_node_connect (state->difference, "aux", state->noise2, "output");
-/*A container is inside a container. 
+/*A container is inside a container.
 Hardlight is connecting to Difference. Containing noise1 and difference, and Difference is connecting to noise 2 in its own container.*/
-  
+
 
 gegl_node_link_many (state->nop, state->color, NULL);
 gegl_node_connect (blendmode, "aux", state->color, "output");
