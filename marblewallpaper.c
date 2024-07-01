@@ -51,7 +51,7 @@ The two graphs below are instructions to make the vast majority of the marble te
 /* A bunch of filters are being chained together in various ways */
 
 #define syntax2 \
-" crop id=sl gimp:layer-mode layer-mode=screen blend-space=rgb-perceptual aux=[ ref=sl softglow glow-radius=50  brightness=0.42 sharpness=0.357  gimp:layer-mode layer-mode=overlay blend-space=rgb-perceptual opacity=0.71 aux=[ color value=#afafaf ] crop id=gaus gimp:layer-mode layer-mode=luminance opacity=0.65 aux=[ ref=gaus gaussian-blur abyss-policy=none clip-extent=false std-dev-x=8 std-dev-y=8 ] levels in-high=1.2 out-high=1.0 "\
+" id=sl gimp:layer-mode layer-mode=screen blend-space=rgb-perceptual aux=[ ref=sl softglow glow-radius=50  brightness=0.42 sharpness=0.357  gimp:layer-mode layer-mode=overlay blend-space=rgb-perceptual opacity=0.71 aux=[ color value=#afafaf ] id=gaus gimp:layer-mode layer-mode=luminance opacity=0.65 aux=[ ref=gaus gaussian-blur abyss-policy=none clip-extent=false std-dev-x=8 std-dev-y=8 ] levels in-high=1.2 out-high=1.0 "\
 /* A bunch of filters are being chained together in various ways. The reason these three syntax chains are not combined is because they go in different orders. Each syntax chain is a node being chained in a particular order.*/
 
 enum_start (marble_clownworld)
