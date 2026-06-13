@@ -15,7 +15,7 @@
  *
  * Credit to Øyvind Kolås (pippin) for major GEGL contributions
  * 2023 - Marble Gimp Plugin by Beaver
-If you paste this syntax in Gimp's GEGL Graph filter you can test this filter without installing
+If you paste this syntax in Gimpꞌs GEGL Graph filter you can test this filter without installing
 The syntax is also listed so users can study how this filter was made.
 
 
@@ -68,7 +68,7 @@ enum_start (marble_clownworld)
   enum_value (GEGL_BLEND_MODE_TYPE_LIGHTEN,      "Lighten",
               N_("Lighten Only"))
 enum_end (marbleclownworld)
-/* This is the first part of color overlay's blend mode switch. The ENUM list with all the blend modes needed by color overlay */
+/* This is the first part of color overlayꞌs blend mode switch. The ENUM list with all the blend modes needed by color overlay */
 
 
 property_seed (seed, _("Seed for Marble Texture"), rand)
@@ -79,14 +79,14 @@ property_enum (blend, _("Blend Mode of Color"),
     marbleclownworld, marble_clownworld,
     GEGL_BLEND_MODE_TYPE_SOFTLIGHT)
     description (_("Blend Mode Color Overlay of the Marble."))
-/* This is the second part of color overlay. The user sees this in the GUI. It alllows them to switch color overlay's blend mode.
+/* This is the second part of color overlay. The user sees this in the GUI. It alllows them to switch color overlayꞌs blend mode.
 There is an instruction for softlight to be the default blend mode on startup. */
 
 property_color (color, _("Color Overlay of the Marble"), "#2ef7b7")
 /* This is gegl color overlay being displayed in the gui with a html color  */
 
 property_double (opacity, _("Color Opacity (zero removes)"), 0.6)
-    description (_("Opacity of the Marble's color overlay. Sliding this to 0 will remove the color overlay."))
+    description (_("Opacity of the Marbleꞌs color overlay. Sliding this to 0 will remove the color overlay."))
     value_range (0.0, 1.0)
     ui_range    (0.0, 1.0)
 /* This is the opacity meter for all of the blend modes */
@@ -197,7 +197,7 @@ in default zero had a lousy effect.*/
                                   "operation", "gegl:color-overlay",
                                   NULL);
 
-/* Below are the blend mode numbers for Gimp's grain merge, multiply, lchcolor, lighten and softlight. If Gimp ever gets
+/* Below are the blend mode numbers for Gimpꞌs grain merge, multiply, lchcolor, lighten and softlight. If Gimp ever gets
 new blend modes all these numbers will be off by one. Either 1 up or one down. (likely one up). This is an
 example of me predicting how my plugins will break  for future maintainers.
 
@@ -230,7 +230,7 @@ state->softlight = gegl_node_new_child (gegl,
     case GEGL_BLEND_MODE_TYPE_LCHCOLOR: blendmode = state->lchcolor; break;
     case GEGL_BLEND_MODE_TYPE_LIGHTEN: blendmode = state->lighten; break;
 
-/* This is the third and final part relating to color overlay's blend mode switch. the state "blendmode" is instructed to update to one of these blend modes that the user specifies.
+/* This is the third and final part relating to color overlayꞌs blend mode switch. the state "blendmode" is instructed to update to one of these blend modes that the user specifies.
 There is an instruction to make softlight the blend mode that appears on startup*/
 
 default: blendmode = state->softlight;
@@ -259,7 +259,7 @@ user selections. */
 
   gegl_operation_meta_redirect (operation, "seed", state->noise1, "seed");
   gegl_operation_meta_redirect (operation, "color", state->color, "value");
-/*Random Seed and Color Overlay's GUI properties defined here.*/
+/*Random Seed and Color Overlayꞌs GUI properties defined here.*/
 
 
   gegl_operation_meta_redirect (operation, "opacity", state->multiply, "opacity");
@@ -284,12 +284,12 @@ GeglOperationMetaClass *operation_meta_class = GEGL_OPERATION_META_CLASS (klass)
 operation_class->attach = attach;
 
   gegl_operation_class_set_keys (operation_class,
-/*If this filter ever breaks try changing the name lb: to something else. This is because Gimp's team may want longer name spaces.*/
+/*If this filter ever breaks try changing the name lb: to something else. This is because Gimpꞌs team may want longer name spaces.*/
     "name",        "lb:marble",
     "title",       _("Marble"),
     "reference-hash", "marn6tjblklmare33jmanbfjr",
     "description", _("Render Marble Wallpaper"),
-/*This is an instruction to put the filter in Gimp's menu. It only works in Gimp 2.99.16 and up. will not work in Gimp 2.10 as of August 28 2023*/
+/*This is an instruction to put the filter in Gimpꞌs menu. It only works in Gimp 2.99.16 and up. will not work in Gimp 2.10 as of August 28 2023*/
     "gimp:menu-path", "<Image>/Filters/Render/Fun",
     "gimp:menu-label", _("Marble..."),
     NULL);
